@@ -1,0 +1,134 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>비행 일지</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>✈️ 비행 일지</h1>
+            <nav>
+                <button id="addFlightBtn" class="nav-btn active">비행 기록 추가</button>
+                <button id="listViewBtn" class="nav-btn">기록 목록</button>
+                <button id="calendarViewBtn" class="nav-btn">달력 보기</button>
+                <button id="statsBtn" class="nav-btn">통계</button>
+            </nav>
+        </header>
+
+        <main>
+            <!-- 비행 기록 추가 폼 -->
+            <section id="addFlightSection" class="section">
+                <h2>새 비행 기록 추가</h2>
+                <form id="flightForm" class="flight-form">
+                    <div class="form-group">
+                        <label for="flightDate">비행 날짜:</label>
+                        <input type="date" id="flightDate" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="flightTime">비행 시간 (분):</label>
+                        <input type="number" id="flightTime" min="1" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="aircraft">기종:</label>
+                        <input type="text" id="aircraft" placeholder="예: Cessna 172" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="departureAirport">출발 공항:</label>
+                        <input type="text" id="departureAirport" placeholder="예: ICN, GMP" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="arrivalAirport">도착 공항:</label>
+                        <input type="text" id="arrivalAirport" placeholder="예: ICN, GMP" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="weather">기상 상태:</label>
+                        <select id="weather" required>
+                            <option value="">선택하세요</option>
+                            <option value="맑음">맑음</option>
+                            <option value="흐림">흐림</option>
+                            <option value="비">비</option>
+                            <option value="눈">눈</option>
+                            <option value="안개">안개</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="instructor">교관 이름:</label>
+                        <input type="text" id="instructor" placeholder="교관 이름">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="flightType">비행 방식:</label>
+                        <select id="flightType" required>
+                            <option value="">선택하세요</option>
+                            <option value="VFR">VFR (Visual Flight Rules)</option>
+                            <option value="IFR">IFR (Instrument Flight Rules)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="notes">비고:</label>
+                        <textarea id="notes" placeholder="특이사항, 메모 등"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">기록 저장</button>
+                </form>
+            </section>
+
+            <!-- 기록 목록 보기 -->
+            <section id="listViewSection" class="section hidden">
+                <h2>비행 기록 목록</h2>
+                <div class="search-filter">
+                    <input type="text" id="searchInput" placeholder="기종이나 공항으로 검색...">
+                    <input type="date" id="startDate" placeholder="시작 날짜">
+                    <input type="date" id="endDate" placeholder="종료 날짜">
+                    <button id="filterBtn">필터링</button>
+                    <button id="clearFilterBtn">초기화</button>
+                </div>
+                <div id="flightList" class="flight-list"></div>
+            </section>
+
+            <!-- 달력 보기 -->
+            <section id="calendarViewSection" class="section hidden">
+                <h2>달력 보기</h2>
+                <div class="calendar-controls">
+                    <button id="prevMonth">&lt;</button>
+                    <span id="currentMonth"></span>
+                    <button id="nextMonth">&gt;</button>
+                </div>
+                <div id="calendar" class="calendar"></div>
+            </section>
+
+            <!-- 통계 대시보드 -->
+            <section id="statsSection" class="section hidden">
+                <h2>통계 대시보드</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>총 비행 횟수</h3>
+                        <p id="totalFlights" class="stat-number">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>총 누적 비행 시간</h3>
+                        <p id="totalHours" class="stat-number">0시간</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>가장 많이 탄 기종 TOP 3</h3>
+                        <div id="topAircraft" class="top-list"></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
